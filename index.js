@@ -16,8 +16,11 @@ app.use(cors());
 app.use(express.json());
 app.use(loggerMiddleware);
 app.use(rateLimitMiddleware);
-
 app.use('/api/auth', authRoutes);
+
+app.get('/', (req, res) => {
+  res.status(200).json({ message: "Server is running successfully with Winston logging!" });
+});
 
 app.use((req, res, next) => {
   const error = new Error(`Route ${req.originalUrl} not found`);
